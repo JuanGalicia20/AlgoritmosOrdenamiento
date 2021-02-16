@@ -20,7 +20,7 @@ public class Reader {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Ordenamientos ordenador = new Ordenamientos();
-		var lista = new Array(0);
+		Comparable[] lista = new Comparable[3000];
 		int insert;
 		
 		
@@ -32,7 +32,10 @@ public class Reader {
  
             while ((line = bufferedReader.readLine()) != null) {
                 insert = Integer.valueOf(line);
-                lista.push(insert);
+                int x = 0;
+                System.out.println(x);
+                lista[x]=insert;
+                x++;
             }
             reader.close();
  
@@ -41,10 +44,9 @@ public class Reader {
         }
 		
 		System.out.println(lista);
-		Comparable[] c = new Comparable[] lista;
-		Comparable[] result = ordenador.bubbleSort(c)
-		System.out.println(result);
-		int len = result.length;
+		ordenador.bubbleSort(lista);
+		System.out.println(lista);
+		int len = lista.length;
 		int i = 0;
 		int ordenado;
 		String insertar;
@@ -52,7 +54,7 @@ public class Reader {
 		try {
 		      FileWriter myWriter = new FileWriter("randomOrdenado.txt");
 		      while(i < len){
-		    	  ordenado = result[i];
+		    	  ordenado = (int) lista[i];
 		    	  insertar = String.valueOf(ordenado);
 					myWriter.write(insertar);
 					myWriter.write("\r\n");
@@ -67,4 +69,5 @@ public class Reader {
 
 	}
 
+	
 }
