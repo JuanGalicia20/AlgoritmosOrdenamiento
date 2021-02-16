@@ -1,24 +1,15 @@
+import java.util.Arrays;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-/**
- * 
- */
-
-/**
- * @author jluch
- *
- */
 public class Reader {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		//Genera el archivo txt con numeros aleatorios
 		Aleatorio Generador = new Aleatorio();
 		int len1 = Generador.generarLen();
@@ -39,10 +30,11 @@ public class Reader {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
-		
+
 		//Lee el archivo generado
 		Ordenamientos ordenador = new Ordenamientos();
-		Comparable[] lista = new Comparable[3000];
+		int x = 0;
+		ArrayList<Integer> lista = new ArrayList<>();
 		int insert;
 		
 		
@@ -54,9 +46,7 @@ public class Reader {
  
             while ((line = bufferedReader.readLine()) != null) {
                 insert = Integer.valueOf(line);
-                int x = 0;
-                System.out.println(x);
-                lista[x]=insert;
+                lista.add(insert);
                 x++;
             }
             reader.close();
@@ -65,18 +55,15 @@ public class Reader {
             e.printStackTrace();
         }
 		
-		System.out.println(lista);
-		ordenador.bubbleSort(lista);
-		System.out.println(lista);
-		int len = lista.length;
+		int len = lista.size();
 		int i = 0;
-		int ordenado;
+		Comparable ordenado;
 		String insertar;
 		
 		try {
 		      FileWriter myWriter = new FileWriter("randomOrdenado.txt");
 		      while(i < len){
-		    	  ordenado = (int) lista[i];
+		    	  ordenado =  lista.get(i);
 		    	  insertar = String.valueOf(ordenado);
 					myWriter.write(insertar);
 					myWriter.write("\r\n");
@@ -88,8 +75,18 @@ public class Reader {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
-
+		
+		Ordenamientos o = new Ordenamientos();
+		Comparable[] lista2 = lista.toArray(new Integer[0]);
+		int n = lista2.length; 
+        for (int k=0; k<n; ++k) 
+            System.out.print(lista2[k] + " "); 
+        System.out.println();
+		
+        System.out.println("--------------------------\n\n");
+        Comparable[] result = o.bubbleSort(lista2);
+        for (int k=0; k<n; ++k) 
+            System.out.print(lista2[k] + " "); 
+        System.out.println();
 	}
-
-	
 }
