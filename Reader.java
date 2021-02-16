@@ -19,6 +19,28 @@ public class Reader {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//Genera el archivo txt con numeros aleatorios
+		Aleatorio Generador = new Aleatorio();
+		int len1 = Generador.generarLen();
+		int j = 1;
+		String input = "";
+		//Crea el archivo
+		try {
+		      FileWriter myWriter = new FileWriter("random.txt");
+		      while(j < len1){
+					input = Generador.numeroRandom();
+					myWriter.write(input);
+					myWriter.write("\r\n");
+					j = j + 1;
+				}
+		      myWriter.close();
+		      System.out.println("Successfully wrote to the file.");
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+		
+		//Lee el archivo generado
 		Ordenamientos ordenador = new Ordenamientos();
 		Comparable[] lista = new Comparable[3000];
 		int insert;
