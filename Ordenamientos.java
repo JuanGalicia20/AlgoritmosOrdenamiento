@@ -2,30 +2,33 @@ import java.util.ArrayList;
 
 public class Ordenamientos {
 
-	public ArrayList<Integer> bubbleSort(ArrayList<Integer> lista)
+	//-----------------------Bubble Sort----------------------------------------
+	public Comparable[] bubbleSort(Comparable[] lista)
 	{
-		int n = lista.size(); 
-        for (int i = 0; i < n-1; i++) 
-            for (int j = 0; j < n-i-1; j++) 
-                if (lista.get(j) > lista.get(j+1)) 
-                { 
-                    // swap arr[j+1] and arr[j] 
-                    int temp = lista.get(j);
-                    lista.set(j, j+1);
-                    //lista.get(j) = lista.get(j+1);
-                    lista.set(j+1, temp);
-                    //lista.get(j+1) = temp; 
-                }
-        return lista;
+		int n = lista.length;
+		Comparable temp;
+		for(int i=0; i<n;i++)
+		{
+			for(int j=0;j<(n-i);j++)
+			{
+				if(lista[j-1].compareTo(lista[j])==1)
+				{
+					temp=lista[j-1];
+					lista[j-1]=lista[j];
+					lista[j]=temp;
+				}
+			}
+		}
+		return lista;
 	}
 	
 	/**
-	 * MÈtodo que utiliza recursividad para ordenar arreglos
+	 * M√©todo que utiliza recursividad para ordenar arreglos
 	 * @param list lista desordenada
 	 * @return merge(left, right) funcion que devuelve la lista ordenada
 	 */
 	public ArrayList<Integer> merge_sort(ArrayList<Integer> list) {
-		//Si el arreglo tiene 0 o 1 elementos ya est· ordenado.
+		//Si el arreglo tiene 0 o 1 elementos ya est√° ordenado.
 		if(list.size() <= 1) {
 			return list;
 		}
@@ -53,7 +56,7 @@ public class Ordenamientos {
 	}
 	
 	/**
-	 * MÈtodo para unir dos arreglos a uno mismo ordenandolos
+	 * M√©todo para unir dos arreglos a uno mismo ordenandolos
 	 * @param left
 	 * @param right
 	 * @return arreglo ordenado y fusionado
@@ -68,7 +71,7 @@ public class Ordenamientos {
 			//Condicion si el primer valor de izquierda es menor o igual al de derecha
 			if(left.get(0).compareTo(right.get(0)) != 1) {
 				
-				//Se aÒade este valor al arreglo de result
+				//Se a√±ade este valor al arreglo de result
 				result.add(left.get(0));
 				
 				//Se remueve este valor del arreglo de izquierda para pasar con el siguiente
@@ -78,7 +81,7 @@ public class Ordenamientos {
 			//Si el valor de derecha es mayor al de izquierda
 			else {
 				
-				//Se aÒade este valor al arreglo de result
+				//Se a√±ade este valor al arreglo de result
 				result.add(right.get(0));
 				
 				//Se remueve este valor del arreglo de derecha para pasar con el siguiente
@@ -89,7 +92,7 @@ public class Ordenamientos {
 		//Ciclo que funciona cuando izquierda tenga valores pero derecha no
 		while(left.size() > 0) {
 			
-			//Se aÒade el primer valor al arreglo de result
+			//Se a√±ade el primer valor al arreglo de result
 			result.add(left.get(0));
 			
 			//Se remueve este valor del arreglo de izquierda
@@ -99,7 +102,7 @@ public class Ordenamientos {
 		//Ciclo que funciona mientras derecha tenga valores pero izquierda no
 		while(right.size() > 0) {
 			
-			//Se aÒade el primer valor al arreglo de result
+			//Se a√±ade el primer valor al arreglo de result
 			result.add(right.get(0));
 			
 			//Se remueve este valor del arreglo de derecha
@@ -120,7 +123,7 @@ public class Ordenamientos {
 			//Condicion si el valor en indice i-1 es menor o igual al valor en indice i
 			if(array[i-1].compareTo(array[i]) != 1){
 				
-				//Pasa al siguiente valor en la lista ya que esta pareja ya est· ordenada
+				//Pasa al siguiente valor en la lista ya que esta pareja ya est√° ordenada
 				i++;
 			}
 			
@@ -143,10 +146,10 @@ public class Ordenamientos {
 				i--;
 			}
 			
-			//CondiciÛn en caso i llegue a ser 0
+			//Condici√≥n en caso i llegue a ser 0
 			if(i == 0) {
 				
-				//Ya que se evalua el indice i-1, esto darÌa error, entonces nuevamente i = 1
+				//Ya que se evalua el indice i-1, esto dar√≠a error, entonces nuevamente i = 1
 				i = 1;
 			}
 			
