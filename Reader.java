@@ -41,9 +41,10 @@ public class Reader {
         }
 		
 		System.out.println(lista);
-		ordenador.bubbleSort(lista);
-		System.out.println(lista);
-		int len = lista.length();
+		Comparable[] c = new Comparable[] lista;
+		Comparable[] result = ordenador.bubbleSort(c)
+		System.out.println(result);
+		int len = result.length;
 		int i = 0;
 		int ordenado;
 		String insertar;
@@ -51,7 +52,7 @@ public class Reader {
 		try {
 		      FileWriter myWriter = new FileWriter("randomOrdenado.txt");
 		      while(i < len){
-		    	  ordenado = lista[i];
+		    	  ordenado = result[i];
 		    	  insertar = String.valueOf(ordenado);
 					myWriter.write(insertar);
 					myWriter.write("\r\n");
