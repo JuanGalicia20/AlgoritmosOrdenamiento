@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,6 +8,14 @@ import java.util.ArrayList;
 
 public class Reader {
 
+	/**
+	 * Juan Galicia 20298
+	 * José Andrés Lucha Nuila 18904
+	 * Programa para calcular tiempo de ejecucion de algoritmos de ordenamiento
+	 * 
+	 * METODO PRINCIPAL DE EJECUCION
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -76,17 +85,95 @@ public class Reader {
 		      e.printStackTrace();
 		    }
 		
+		System.out.println("Los numeros fueron generados con exito");
 		Ordenamientos o = new Ordenamientos();
 		Comparable[] lista2 = lista.toArray(new Integer[0]);
+		Comparable[] l1=lista2;
+		Comparable[] l2=lista2;
+		Comparable[] l3=lista2;
+		Comparable[] l4=lista2;
+		Comparable[] l5=lista2;
+		Scanner leer = new Scanner(System.in);
 		int n = lista2.length; 
         for (int k=0; k<n; ++k) 
             System.out.print(lista2[k] + " "); 
         System.out.println();
 		
-        System.out.println("--------------------------\n\n");
-        Comparable[] result = o.bubbleSort(lista2);
-        for (int k=0; k<n; ++k) 
-            System.out.print(lista2[k] + " "); 
-        System.out.println();
+        String op="";
+        while(!op.equals("6"))
+        {
+        	System.out.println("Bienvenidos Seleccione una opcion para calcular el tiempo de ejecucion\n"
+        			+ "Puede correr cada algoritmo con el array desordenado 1 vez, el array de cada uno es independiente"
+            		+ "1.Bubble Sort\n"
+            		+ "2.Merge Sort\n"
+            		+ "3.Gnome Sort\n"
+            		+ "4.Quick Sort\n"
+            		+ "5.Radix Sort\n"
+            		+ "6.Salir\n");
+        	op=leer.next();
+        	switch(op)
+        	{
+	        	case "1":
+	        	{
+	        		System.out.println("--------------------------\n\n");
+	                Comparable[] result = o.bubbleSort(l1);
+	                System.out.println("BUBBLE SORT:\n");
+	                for (int k=0; k<n; ++k) 
+	                    System.out.print(l1[k] + " "); 
+	                System.out.println();
+	                break;
+	        	}
+	        	case "2":
+	        	{
+	        		System.out.println("--------------------------\n\n");
+	                Comparable[] result = o.sortGivenArray(l2);
+	                System.out.println("MERGE SORT:\n");
+	                for (int k=0; k<n; ++k) 
+	                    System.out.print(l2[k] + " "); 
+	                System.out.println();
+	                break;
+	        	}
+	        	case "3":
+	        	{
+	        		System.out.println("--------------------------\n\n");
+	                Comparable[] result = o.gnomeSort(l3);
+	                System.out.println("GNOME SORT:\n");
+	                for (int k=0; k<n; ++k) 
+	                    System.out.print(l3[k] + " "); 
+	                System.out.println();
+	                break;
+	        	}
+	        	case "4":
+	        	{
+	        		System.out.println("--------------------------\n\n");
+	                Comparable[] result = o.sort(l4,0,l4.length-1);
+	                System.out.println("QUICK SORT:\n");
+	                for (int k=0; k<n; ++k) 
+	                    System.out.print(l4[k] + " "); 
+	                System.out.println();
+	                break;
+	        	}
+	        	case "5":
+	        	{
+	        		System.out.println("--------------------------\n\n");
+	                Comparable[] result = o.radix(l5);
+	                System.out.println("RADIX SORT:\n");
+	                for (int k=0; k<n; ++k) 
+	                    System.out.print(l5[k] + " "); 
+	                System.out.println();
+	                break;
+	        	}
+	        	case "6":
+	        	{
+	        		System.exit(0);
+	        		 break;
+	        	}
+	        	default:
+	        	{
+	        		System.out.println("Ingrese un valor valido");
+	        		 break;
+	        	}
+        	}
+        }
 	}
 }
