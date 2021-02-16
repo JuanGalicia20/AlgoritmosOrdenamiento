@@ -7,109 +7,81 @@ public class Ordenamientos {
 	{
 		int n = lista.length;
 		Comparable temp;
-		for(int i=0; i<n;i++)
-		{
-			for(int j=0;j<(n-i);j++)
-			{
-				if(lista[j-1].compareTo(lista[j])==1)
-				{
-					temp=lista[j-1];
-					lista[j-1]=lista[j];
-					lista[j]=temp;
-				}
-			}
-		}
-		return lista;
+        for(int i=0; i<n;i++)
+        {
+        	for(int j=1;j<(n-i);j++)
+        	{
+        		if(lista[j-1].compareTo(lista[j])==1)
+        		{
+        			temp=lista[j-1];
+        			lista[j-1]=lista[j];
+        			lista[j]=temp;
+        		}
+        	}
+        }
+        return lista;
 	}
+    
 	
-	/**
-	 * Método que utiliza recursividad para ordenar arreglos
-	 * @param list lista desordenada
-	 * @return merge(left, right) funcion que devuelve la lista ordenada
-	 */
-	public ArrayList<Integer> merge_sort(ArrayList<Integer> list) {
-		//Si el arreglo tiene 0 o 1 elementos ya está ordenado.
-		if(list.size() <= 1) {
-			return list;
-		}
-		
-		//Se crean dos arreglos, uno para el lado izquierdo del arreglo, otro para el derecho.
-		ArrayList<Integer> left = new ArrayList<Integer>();
-		ArrayList<Integer> right = new ArrayList<Integer>();
-		
-		//Ciclo for para que la primera parte del arreglo list vaya a la izquierda y el resto a la derecha
-		for(int i = 0; i < list.size(); i++) {
-			if(i < list.size()/2) {
-				left.add(list.get(i));
-			}
-			else {
-				right.add(list.get(i));
-			}
-		}
-		
-		//Aplicando recursividad se hace el mismo proceso para los arreglos de izquierda y derecha
-		left = merge_sort(left);
-		right = merge_sort(right);
-		
-		return merge(left, right);
-			
-	}
-	
-	/**
-	 * Método para unir dos arreglos a uno mismo ordenandolos
-	 * @param left
-	 * @param right
-	 * @return arreglo ordenado y fusionado
-	 */
-	public static ArrayList<Integer> merge(ArrayList<Integer> left, ArrayList<Integer> right) {
-		//Arreglo donde se fusionaran los arreglos de izquierda y derevha
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		
-		//Ciclo que funciona mientras los arreglos de izquierda y derecha aun tengan valores
-		while(left.size() > 0 & right.size() > 0) {
-			
-			//Condicion si el primer valor de izquierda es menor o igual al de derecha
-			if(left.get(0).compareTo(right.get(0)) != 1) {
-				
-				//Se añade este valor al arreglo de result
-				result.add(left.get(0));
-				
-				//Se remueve este valor del arreglo de izquierda para pasar con el siguiente
-				left.remove(0);
-			}
-			
-			//Si el valor de derecha es mayor al de izquierda
-			else {
-				
-				//Se añade este valor al arreglo de result
-				result.add(right.get(0));
-				
-				//Se remueve este valor del arreglo de derecha para pasar con el siguiente
-				right.remove(0);
-			}
-		}
-		
-		//Ciclo que funciona cuando izquierda tenga valores pero derecha no
-		while(left.size() > 0) {
-			
-			//Se añade el primer valor al arreglo de result
-			result.add(left.get(0));
-			
-			//Se remueve este valor del arreglo de izquierda
-			left.remove(0);
-		}
-		
-		//Ciclo que funciona mientras derecha tenga valores pero izquierda no
-		while(right.size() > 0) {
-			
-			//Se añade el primer valor al arreglo de result
-			result.add(right.get(0));
-			
-			//Se remueve este valor del arreglo de derecha
-			right.remove(0);
-		}
-		return result;
-	}
+	//-------------------------MERGE SORT------------------
+ 
+    public Comparable[] sortGivenArray(Comparable[] inputArray){       
+        inputArray=divide(0, inputArray.length-1, inputArray);
+        return inputArray;
+    }
+    
+    public Comparable[] divide(int startIndex,int endIndex, Comparable[] inputArray){
+        
+        //Divide till you breakdown your list to single element
+        if(startIndex<endIndex && (endIndex-startIndex)>=1){
+            int mid = (endIndex + startIndex)/2;
+            divide(startIndex, mid, inputArray);
+            divide(mid+1, endIndex,inputArray);        
+            
+            //merging Sorted array produce above into one sorted array
+            inputArray=merger(startIndex,mid,endIndex, inputArray);
+        }
+        return inputArray;
+    }   
+    
+    public Comparable[] merger(int startIndex,int midIndex,int endIndex, Comparable[] inputArray){
+        
+        //Below is the mergedarray that will be sorted array Array[i-midIndex] , Array[(midIndex+1)-endIndex]
+        ArrayList<Integer> mergedSortedArray = new ArrayList<Integer>();
+        
+        int leftIndex = startIndex;
+        int rightIndex = midIndex+1;
+        
+        while(leftIndex<=midIndex && rightIndex<=endIndex){
+            if(inputArray[leftIndex].compareTo(inputArray[rightIndex])==-1){
+                mergedSortedArray.add((Integer) inputArray[leftIndex]);
+                leftIndex++;
+            }else{
+                mergedSortedArray.add((Integer) inputArray[rightIndex]);
+                rightIndex++;
+            }
+        }       
+        
+        //Either of below while loop will execute
+        while(leftIndex<=midIndex){
+            mergedSortedArray.add((Integer) inputArray[leftIndex]);
+            leftIndex++;
+        }
+        
+        while(rightIndex<=endIndex){
+            mergedSortedArray.add((Integer) inputArray[rightIndex]);
+            rightIndex++;
+        }
+        
+        int i = 0;
+        int j = startIndex;
+        //Setting sorted array to original one
+        while(i<mergedSortedArray.size()){
+            inputArray[j]=mergedSortedArray.get(i++);
+            j++;
+        }
+        return inputArray;
+    }
 	
 	/**
 	 * Metodo para ordenar arreglos utilizando algoritmo Gnome
